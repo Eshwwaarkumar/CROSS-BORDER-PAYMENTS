@@ -128,11 +128,17 @@ function auth(req, res, next) {
 }
 
 // =======================
-// 🔥 Kafka
+// 🔥 Kafka Setup
 // =======================
 const kafka = new Kafka({
-  clientId: 'payment-app',
-  brokers: [process.env.KAFKA_BROKERS || '127.0.0.1:9092']
+  clientId: 'worker',
+  brokers: [process.env.KAFKA_BROKERS || '127.0.0.1:9092'],
+  ssl: process.env.KAFKA_SASL_USERNAME ? true : false,
+  sasl: process.env.KAFKA_SASL_USERNAME ? {
+    mechanism: 'plain',
+    username: process.env.KAFKA_SASL_USERNAME,
+    password: process.env.KAFKA_SASL_PASSWORD
+  } : undefined
 });
 
 const producer = kafka.producer();
