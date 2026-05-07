@@ -289,10 +289,16 @@ async function register() {
   btnLoader.style.display = "block";
 
   try {
+    const userData = {
+      username: username.value.trim(),
+      password: password.value.trim(),
+      country: country.value
+    };
+
     const res = await fetch("https://payflow-transaction-service.onrender.com/register", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({ username: username.value, password: password.value, country: country.value })
+      body: JSON.stringify(userData)
     });
 
     if (res.ok) {
