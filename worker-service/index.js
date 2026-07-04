@@ -23,7 +23,7 @@ mongoose.connect(mongoUri)
   });
 
 // =======================
-// 👤 USER MODEL
+// 👤 USER MODEL 
 // =======================
 const User = mongoose.model('User', new mongoose.Schema({
   username: String,
